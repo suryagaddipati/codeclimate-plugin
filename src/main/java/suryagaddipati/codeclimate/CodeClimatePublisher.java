@@ -5,12 +5,14 @@ import hudson.matrix.*;
 import hudson.model.*;
 import hudson.plugins.analysis.core.*;
 import hudson.plugins.analysis.util.*;
-import hudson.tasks.*;
+import org.apache.commons.lang.*;
 import org.kohsuke.stapler.*;
 
 import java.io.*;
 
 public class CodeClimatePublisher extends HealthAwarePublisher{
+    private static final String DEFAULT_FILE_NAME = "code-climate-result.json";
+    private String resultFile;
     @DataBoundConstructor
     public CodeClimatePublisher(){
         super("CODECLIMATE");
@@ -29,7 +31,7 @@ public class CodeClimatePublisher extends HealthAwarePublisher{
 //        Shell execution = new Shell("#!/bin/bash  -ex \n" + codeClimateCommand);
         try {
 //            execution.perform(((AbstractBuild) build), launcher, launcher.getListener());
-            FilesParser parser = new FilesParser("CODE_CLIMATE", "code-climate-result.json",
+            FilesParser parser = new FilesParser("CODE_CLIMATE", StringUtils.defaultIfEmpty(getResultFile(), DEFAULT_FILE_NAME),
                     new CodeClimateResultParser(getDefaultEncoding()),
                     false, false);
             ParserResult project = ((AbstractBuild) build).getWorkspace().act(parser);
@@ -48,6 +50,14 @@ public class CodeClimatePublisher extends HealthAwarePublisher{
     @Override
     public MatrixAggregator createAggregator(MatrixBuild matrixBuild, Launcher launcher, BuildListener buildListener) {
         return null;
+    }
+
+    public String getResultFile() {
+        return resultFile;
+    }
+    @DataBoundSetter
+    public void setResultFile(String resultFile) {
+        this.resultFile = resultFile;
     }
 }
 
