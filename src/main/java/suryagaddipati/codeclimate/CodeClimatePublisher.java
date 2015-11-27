@@ -5,6 +5,7 @@ import hudson.matrix.*;
 import hudson.model.*;
 import hudson.plugins.analysis.core.*;
 import hudson.plugins.analysis.util.*;
+import hudson.tasks.*;
 import org.apache.commons.lang.*;
 import org.kohsuke.stapler.*;
 
@@ -21,16 +22,16 @@ public class CodeClimatePublisher extends HealthAwarePublisher{
     @Override
     protected boolean perform(final Run<?, ?> build, final FilePath workspace, final Launcher launcher, final PluginLogger logger)
             throws IOException, InterruptedException {
-//        String codeClimateCommand = "docker run " +
-//                "  --interactive  --rm  " +
-//                "  --env CODE_PATH=\"$PWD\" " +
-//                "  --volume \"$PWD\":/code " +
-//                "  --volume /var/run/docker.sock:/var/run/docker.sock " +
-//                "  --volume /tmp/cc:/tmp/cc " +
-//                "  codeclimate/codeclimate analyze -f json> code-climate-result.json";
-//        Shell execution = new Shell("#!/bin/bash  -ex \n" + codeClimateCommand);
         try {
-//            execution.perform(((AbstractBuild) build), launcher, launcher.getListener());
+            String codeClimateCommand = "docker run " +
+                    "  --interactive  --rm  " +
+                    "  --env CODE_PATH=\"$PWD\" " +
+                    "  --volume \"$PWD\":/code " +
+                    "  --volume /var/run/docker.sock:/var/run/docker.sock " +
+                    "  --volume /tmp/cc:/tmp/cc " +
+                    "  codeclimate/codeclimate analyze -f json> code-climate-result.json";
+            Shell execution = new Shell("#!/bin/bash  -ex \n" + codeClimateCommand);
+            execution.perform(((AbstractBuild) build), launcher, launcher.getListener());
             FilesParser parser = new FilesParser("CODE_CLIMATE", StringUtils.defaultIfEmpty(getResultFile(), DEFAULT_FILE_NAME),
                     new CodeClimateResultParser(getDefaultEncoding()),
                     false, false);
