@@ -1,0 +1,12 @@
+target/
+work/
+.idea
+.DS_Store
+.project
+.settings
+.classpath
+/bin
+_site
+*.iws
+*.ipr
+*.iml
