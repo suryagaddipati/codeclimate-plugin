@@ -17,6 +17,9 @@ public class CodeClimatePublisher extends HealthAwarePublisher{
     @DataBoundConstructor
     public CodeClimatePublisher(){
         super("CODECLIMATE");
+        setUsePreviousBuildAsReference(true);
+        setUseStableBuildAsReference(true);
+        setCanRunOnFailed(false);
     }
 
     @Override

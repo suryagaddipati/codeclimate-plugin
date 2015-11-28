@@ -34,11 +34,6 @@ public class CodeClimateResultParser extends AbstractAnnotationParser {
         } catch (IOException e) {
            throw new RuntimeException(e) ;
         }
-//        CodeClimateAnnotation annotation = new CodeClimateAnnotation("meow",5,7,"type","meow");
-//        annotation.setPriority(Priority.HIGH);
-//        annotation.setFileName("Dockerfile");
-//
-//        annotations.add(annotation);
         return annotations;
     }
 }

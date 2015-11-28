@@ -16,6 +16,7 @@ public class CodeClimateWarning {
     public  Location location;
     public Content content;
     public String engine_name;
+    public String severity;
 
     public static class Content{
        public String body;
