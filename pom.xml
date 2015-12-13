@@ -9,8 +9,8 @@
     <relativePath />
   </parent>
   <groupId>suryagaddipati</groupId>
-  <artifactId>codeclimate-plugin</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <artifactId>codeclimate</artifactId>
+  <version>1.0-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <licenses>
     <license>
