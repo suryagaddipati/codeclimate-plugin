@@ -9,7 +9,7 @@ Add `Codeclimate` post-build action. Plugin launches codeclimate execution and p
 
 
 
-Screenshots 
+##Screenshots 
 
 ![configuration](http://i.imgur.com/OiBUfiI.png "Configuration")
 
