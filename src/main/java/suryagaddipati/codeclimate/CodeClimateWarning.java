@@ -27,9 +27,21 @@ public class CodeClimateWarning {
 
     public static class Location{
         public String path;
-        public Position positions;
+        private Position positions;
+        private LinePosition lines;
 
+        public int getEndLine() {
+            return lines ==null? positions.end.line: lines.end;
+        }
 
+        public int getBeginLine() {
+            return lines ==null? positions.begin.line: lines.begin;
+        }
+
+        public static  class LinePosition{
+            public int begin;
+            public int end;
+        }
 
         public static class Position{
             public ColLine begin;
